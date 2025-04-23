@@ -351,12 +351,203 @@
                 left: -30px;
             }
         }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: var(--dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-link {
+                font-size: 1.2rem;
+                padding: 1rem;
+            }
+
+            /* Hero Section Mobile */
+            .hero {
+                padding: 6rem 1rem 2rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            /* Sections Mobile */
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            /* Projects Mobile */
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                margin: 0 1rem;
+            }
+
+            /* Skills Mobile */
+            .skills-container {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .skill-card {
+                margin-bottom: 1rem;
+            }
+
+            /* Timeline Mobile */
+            .timeline::before {
+                left: 1rem;
+            }
+
+            .timeline-content {
+                width: calc(100% - 3rem);
+                margin-left: 3rem !important;
+            }
+
+            .timeline-content::before {
+                left: -2.5rem !important;
+            }
+
+            /* Contact Form Mobile */
+            .contact-form {
+                padding: 0 1rem;
+            }
+
+            .form-control {
+                font-size: 1rem;
+            }
+
+            /* Footer Mobile */
+            .footer {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .projects-grid,
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) {
+            .project-card:hover,
+            .skill-card:hover {
+                transform: none;
+            }
+
+            .nav-link:active,
+            .btn:active,
+            .social-link:active {
+                opacity: 0.7;
+            }
+        }
+
+        /* Landscape Mode */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 5rem 0;
+            }
+
+            .nav-links.active {
+                padding: 1rem 0;
+                height: auto;
+                min-height: 100vh;
+            }
+        }
+
+        /* High DPI Screens */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Additional Mobile Optimizations */
+        .mobile-padding {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        .mobile-bottom-padding {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Smooth Scrolling for iOS */
+        .ios-scroll {
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
 </head>
-<body>
-    <nav class="nav">
+<body class="ios-scroll">
+    <nav class="nav mobile-padding">
         <div class="container nav-content">
             <a href="#" class="logo">S.S.K</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="nav-links">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#projects" class="nav-link">Projects</a>
@@ -483,5 +674,68 @@
             <p>&copy; 2024 Shamanth.S.Kumbar. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const navLinksItems = document.querySelectorAll('.nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close menu when clicking nav links
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Smooth scroll for iOS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Handle viewport height for mobile browsers
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        setVH();
+        window.addEventListener('resize', setVH);
+
+        // Add touch feedback
+        document.querySelectorAll('.project-card, .skill-card, .btn, .nav-link').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.opacity = '0.7';
+            });
+            element.addEventListener('touchend', function() {
+                this.style.opacity = '1';
+            });
+        });
+    </script>
 </body>
 </html>
