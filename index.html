@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume - Shamanth.S.Kumbar</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #ff4081;
+            --background: #fafafa;
+            --text: #37474f;
+            --light: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, #303f9f 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--light);
+            box-shadow: 0 10px 30px var(--shadow);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--gradient);
+            padding: 3rem 2rem;
+            color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 3px;
+            background: var(--secondary);
+            margin-right: 1rem;
+            border-radius: 3px;
+        }
+
+        .summary {
+            font-size: 1.1rem;
+            color: var(--text);
+            max-width: 800px;
+            line-height: 1.8;
+            padding: 1.5rem;
+            background: var(--background);
+            border-radius: 12px;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .education-item {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 12px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .education-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .grade {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary);
+            color: var(--light);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .project {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateX(10px);
+        }
+
+        .project h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project ul {
+            list-style: none;
+        }
+
+        .project ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .project ul li::before {
+            content: "→";
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .certification {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 12px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .certification-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .certification-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .skills-list {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 12px;
+            height: 100%;
+        }
+
+        .skills-list strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                border-radius: 12px;
+            }
+
+            .header {
+                padding: 2rem 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .education-grid,
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: none;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .header {
+                background: var(--primary);
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .education-item:hover,
+            .project:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SHAMANTH.S.KUMBAR</h1>
+            <div class="contact-info">
+                <span>Shivamogga, Karnataka</span>
+                <span>6363868655</span>
+                <span>shamanthskumbar@gmail.com</span>
+                <span>Linkedin</span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="section">
+                <div class="section-title">Summary</div>
+                <div class="summary">
+                    I aspire to join a dynamic organization where I can apply my technical knowledge, creativity, and leadership abilities in a challenging role, contributing to the company's success while fostering personal and professional growth
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Education</div>
+                <div class="education-grid">
+                    <div class="education-item">
+                        <strong>PES Institute of Technology and Management, Shivamogga.</strong>
+                        <span class="grade">6.7 CGPA</span>
+                        <div>B.E. in Computer Science and Engineering.</div>
+                        <div>Nov 2022- Present</div>
+                    </div>
+                    <div class="education-item">
+                        <strong>Gangothri PU College,Shivamogga</strong>
+                        <span class="grade">54%</span>
+                        <div>Class 12th</div>
+                        <div>July 2022</div>
+                    </div>
+                    <div class="education-item">
+                        <strong>Saandeepani English High School, Shivamogga.</strong>
+                        <span class="grade">59%</span>
+                        <div>Class 10</div>
+                        <div>Apr 2020</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Academic Projects</div>
+                <div class="project">
+                    <h3>Hotel Management System</h3>
+                    <ul>
+                        <li>Developed a web-based hotel management system with a team of three using Visual Studio Code and XAMPP.</li>
+                        <li>Integrated features like room booking, guest records, billing, inventory tracking, and staff scheduling for Admin, Hotel Managers, and Staff.</li>
+                    </ul>
+                </div>
+                <div class="project">
+                    <h3>Breast Cancer Detection System</h3>
+                    <ul>
+                        <li>Developed a Breast Cancer Detection System leveraging Python and machine learning techniques. The project involves preprocessing medical datasets, feature extraction, and it defines the uploaded X-Ray is malignant or benign or normal using CNN algorithms to accurately identify malignant and benign tumors</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Certifications</div>
+                <div class="certifications-grid">
+                    <div class="certification">
+                        <div class="certification-title">Code Craft: Mastering Competitive Programming for the IT Arena</div>
+                        <div>PESITM association with Academics and Operations 10 Seconds ltd</div>
+                        <div class="certification-date">Jul 2024</div>
+                    </div>
+                    <div class="certification">
+                        <div class="certification-title">Enterprise App Development with JAVA EE</div>
+                        <div>PESITM association with Praio Tech Solutions LLP</div>
+                        <div class="certification-date">Feb 2024</div>
+                    </div>
+                    <div class="certification">
+                        <div class="certification-title">WEB DEVELOPMENT USING WORDPRESS & DIGITAL MARKETING</div>
+                        <div>PESITM association with Contriver</div>
+                        <div class="certification-date">Jul 2024</div>
+                    </div>
+                    <div class="certification">
+                        <div class="certification-title">NPTEL Certification on Cloud Computing</div>
+                        <div>Indian Institute of Technology Khanpur</div>
+                        <div class="certification-date">Jul - oct 2024</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Skills</div>
+                <div class="skills-container">
+                    <div class="skills-list">
+                        <strong>Front-End Development</strong>
+                        HTML, CSS
+                    </div>
+                    <div class="skills-list">
+                        <strong>Tools & Frameworks</strong>
+                        XAMPP
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Additional Information</div>
+                <div class="skills-container">
+                    <div class="skills-list">
+                        <strong>Languages Known</strong>
+                        English, Kannada
+                    </div>
+                    <div class="skills-list">
+                        <strong>Soft Skills</strong>
+                        Team Collaboration & Communication, Leadership, Adaptability, Time Management, Team work communication skills adaptability
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
